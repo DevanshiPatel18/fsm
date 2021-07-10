@@ -107,21 +107,7 @@ export default function Report(){
                     <CardContent style={{padding: 5+'%', paddingTop: 0}}>
                         <BarGraph></BarGraph>
                     </CardContent>
-                </Card>
-                <Card style={{flex: 1}}>
-                <CardHeader 
-                            title= {
-                                <div>
-                                    <h3 style={{display: 'inline-block'}}>Time Analysis</h3>
-                                    <p style={{display: 'inline-block', marginLeft: 2+'%'}}variant = 'body2'>( in minutes )</p>
-                                    <hr />
-                                </div>
-                            }
-                        />
-                        <CardContent>
-                            <DonutGraph></DonutGraph>
-                        </CardContent>
-                </Card>
+                </Card> 
             </Grid>
             </PDFExport>
         </Grid>
@@ -212,4 +198,25 @@ export default function Report(){
                             <DonutGraph></DonutGraph>
                         </CardContent>
                     </Card>
-            </Grid>*/
+            </Grid>
+            
+            
+            
+            
+            
+            <Card style={{flex: 1}}>
+                <CardHeader 
+                            title= {
+                                <div>
+                                    <h3 style={{display: 'inline-block'}}>Time Analysis</h3>
+                                    <p style={{display: 'inline-block', marginLeft: 2+'%'}}variant = 'body2'>( in minutes )</p>
+                                    <hr />
+                                </div>
+                            }
+                        />
+                        <CardContent>
+                            <DonutGraph></DonutGraph>
+                        </CardContent>
+                </Card>
+            
+            */

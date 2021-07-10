@@ -42,33 +42,33 @@ const StyledTableRow = withStyles((theme) => ({
 export default function PerformanceGraph(){
   //const theme = useTheme();
  
-
-     const [currentOEE, setCurrentOEE] = useState(0);
-    const [currentAvail, setCurrentAvail] = useState(0);
-    const [currentQual, setCurrentQual] = useState(0);
-    const [currentPer, setCurrentPer] = useState(0);  
-
   
+  
+  let thiscurrentOEE =0;
+  let thiscurrentPer =0;
+  let thiscurrentAvail =0;
+  let thiscurrentQual =0;
+
     const customLabel = [
     {
       icon: ShowChart,
       text: 'OEE',
-      value: currentOEE,
+      value: thiscurrentOEE,
       color: '#1199EE',
     },{
       icon: ShowChart,
       text: 'Performance',
-      value: currentPer,
+      value: thiscurrentPer,
       color: '#D1A166',
     },{
       icon: ShowChart,
       text: 'Quality',
-      value: currentQual,
+      value: thiscurrentQual,
       color: '#E03409',
     },{
       icon: ShowChart,
       text: 'Availibility',
-      value: currentAvail,
+      value: thiscurrentAvail,
       color: '#000000',
     }
   ]
@@ -116,32 +116,24 @@ export default function PerformanceGraph(){
       }
     ]
   };
- 
+
+
   const onRefresh = chart => {
     const now = Date.now();
-    let thiscurrentOEE =0;
-      let thiscurrentPer =0;
-      let thiscurrentAvail =0;
-      let thiscurrentQual =0;
+
     db.collection('Realtime').doc('WS 1').get().then((doc) => {
 
       thiscurrentOEE = doc.data().oee;
       thiscurrentPer = doc.data().availability;
       thiscurrentAvail = doc.data().performance;
       thiscurrentQual = doc.data().quality;
-      console.log(currentOEE+" "+currentAvail+" "+currentPer+" "+currentQual)
+  
   })
     chart.data.datasets[0].data.push({x: now, y: thiscurrentOEE});
     chart.data.datasets[1].data.push({x: now, y: thiscurrentPer});
     chart.data.datasets[2].data.push({x: now, y: thiscurrentQual});
     chart.data.datasets[3].data.push({x: now, y: thiscurrentAvail});
-  
 
-    
-    setCurrentOEE(thiscurrentOEE);
-    setCurrentAvail(thiscurrentAvail);
-    setCurrentPer(thiscurrentPer);
-    setCurrentQual(thiscurrentQual);
     /*chart.data.datasets.forEach((dataset,id) => {
       console.log(id)
       dataset.data.push({
@@ -152,7 +144,6 @@ export default function PerformanceGraph(){
     */
     
   };
-
   const config = {
     reponsive: true,
     maintainAspectRatio: true,
@@ -189,8 +180,9 @@ export default function PerformanceGraph(){
       },
   };
 
-    const {processLog} = useProcessStatus();
-
+   
+  const {processLog} = useProcessStatus();
+  console.log(process);
     return(
         <div style={{display: 'flex', justifyContent: 'space-between',width: 100+'%',}}>
           <Card style={{display: 'inline-block',width: 65+'%', height: 100+'%',boxShadow: 'rgba(0, 0, 0, 0.35) 0px 5px 15px'}}>
@@ -240,10 +232,10 @@ export default function PerformanceGraph(){
                   </TableHead>
                   <TableBody>
                     {processLog.map((aProcess) => (
-
                     <StyledTableRow>
                       <StyledTableCell>
-                        {aProcess.process}
+                        {
+                        aProcess.process}
                       </StyledTableCell>
                       <StyledTableCell>
                         {aProcess.date}

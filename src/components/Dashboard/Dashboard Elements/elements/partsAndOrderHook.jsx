@@ -18,13 +18,16 @@ export default function usePartsAndOrder(){
             setDefective(doc.get('Total Defective'));
             
                 db.collection('OrderTest').doc('CurrentOrder').onSnapshot((doc) => {
+                    
+                        console.log(doc.data().Machine);
                     setProcess(doc.get('Process'));
-                    if( process !== 'Waiting...'){
+ 
                         setProcess(doc.get('Process'));
                         db.collection("Order").orderBy("Time", "desc").limit(1).onSnapshot((snapshot) => {
                           setOrderType(snapshot.docs[0].data().Type)
                         });
-                    }
+                    
+                
                 })
             
         })

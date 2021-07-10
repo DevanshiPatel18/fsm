@@ -56,7 +56,8 @@ export default function Workstations(){
     //const theme = useTheme();
     const {workstation1, workstation2, workstation3} = useWorkstationData();
     const {workstation1Status, workstation2Status, workstation3Status} = useStatusChange();
-
+    console.log(workstation1Status + " " + workstation2Status + " " +workstation3Status);
+    
     function setColor(parameter){
         if( !parameter || parameter === 'false')
             return red[500];

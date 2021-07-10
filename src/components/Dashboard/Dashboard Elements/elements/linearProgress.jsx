@@ -38,10 +38,10 @@ const useStyles = makeStyles({
 
 export default function LinearWithValueLabel(props) {
   const classes = useStyles();
-
+  console.log(props.progress);
   return (
     <div className={classes.root}>
-      <LinearProgressWithLabel value={parseInt(props.progress)} />
+      <LinearProgressWithLabel value={props.progress} />
     </div>
   );
 }

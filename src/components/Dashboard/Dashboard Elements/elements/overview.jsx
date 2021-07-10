@@ -8,6 +8,8 @@ import PropTypes from 'prop-types';
 import usePartsAndOrder from './partsAndOrderHook';
 import db from '../../../../firebase';
 import useStatusChange from './statuschange';
+import { useState } from 'react';
+import { useEffect } from 'react';
 const firebase = require('firebase');
 require('firebase/firestore')
 require('firebase/auth')
@@ -61,9 +63,28 @@ const useStyles = makeStyles({
 export default function Overview(props){
 
     const classes = useStyles();
-    let partType= 'NA'
     const {manufactured, defective, process, orderType} = usePartsAndOrder();
-    const {totalProgess} = useStatusChange()
+    const [totalProgess, setTotalProgress] = useState(-2);
+
+    useEffect(() => {
+        let flag = 0;
+        db.collection('OrderTest').doc('CurrentOrder').onSnapshot((snap) => {
+            if(!snap.data().Machine)
+            flag = 1;
+        })
+        if( flag === 0){
+        db.collection('OrderTest').doc('CurrentOrder').onSnapshot((snapshot) => {
+            if(snapshot.data().Process === 'Completed')
+                totalProgess(100)
+            else{
+                    setTotalProgress(totalProgess + 2)
+
+            }
+        })
+    }else{
+        setTotalProgress(0)
+    }
+    },[])
 
     return(
         <Grid>
