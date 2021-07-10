@@ -1,0 +1,5 @@
+.k-pdf-export * {
+    display: block;
+    width: 100%;    
+    color: 'red';
+}
