@@ -6,22 +6,22 @@ const firebase = require('firebase');
 require('firebase/firestore')
 require('firebase/auth')
 
-const processLog = [{
-}];
 
 export default function useProcessStatus(){
-    const [process, setProcess] = useState(["No Order"])
+    const [process, setProcess] = useState([])
+
     React.useEffect(() => {
     db.collection('OrderTest').doc('CurrentOrder').onSnapshot((doc) => {
         const date = new Intl.DateTimeFormat('en-GB', { dateStyle: 'full', timeStyle: 'long' }).format(Date.now());
         //console.log(enUSFormatter.format(date) + new Date().getTime());
         const processPart = doc.data().Process
-        processLog.push({ process : processPart, date : date});
-        setProcess(processLog)
+        console.log(processPart);
+        setProcess([...process, {process : processPart, date : date}]);
+        
     })
 }, [])
-    console.log(processLog)
+    console.log(process)
     return{
-        processLog
+        process
     }
 }

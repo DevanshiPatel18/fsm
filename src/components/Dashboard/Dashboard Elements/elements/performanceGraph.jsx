@@ -181,7 +181,7 @@ export default function PerformanceGraph(){
   };
 
    
-  const {processLog} = useProcessStatus();
+  const {process} = useProcessStatus();
   console.log(process);
     return(
         <div style={{display: 'flex', justifyContent: 'space-between',width: 100+'%',}}>
@@ -231,7 +231,7 @@ export default function PerformanceGraph(){
                     </TableRow>
                   </TableHead>
                   <TableBody>
-                    {processLog.map((aProcess) => (
+                    {process.map((aProcess) => (
                     <StyledTableRow>
                       <StyledTableCell>
                         {
