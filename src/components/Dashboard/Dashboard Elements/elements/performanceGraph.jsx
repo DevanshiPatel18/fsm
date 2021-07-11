@@ -181,7 +181,7 @@ export default function PerformanceGraph(){
   };
 
    
-  const {process} = useProcessStatus();
+  const {processLog} = useProcessStatus();
   console.log(process);
     return(
         <div style={{display: 'flex', justifyContent: 'space-between',width: 100+'%',}}>
@@ -230,22 +230,7 @@ export default function PerformanceGraph(){
                       <StyledTableCell>TimeStamp</StyledTableCell>
                     </TableRow>
                   </TableHead>
-                  <TableBody>
-                    {process.map((aProcess) => (
-                    <StyledTableRow>
-                      <StyledTableCell>
-                        {
-                        aProcess.process}
-                      </StyledTableCell>
-                      <StyledTableCell>
-                        {aProcess.date}
-                      </StyledTableCell>
-                    </StyledTableRow>
-                    
-                    ))
-                  }
-                    
-                  </TableBody>
+                  
                   </Scrollbars>
                 </Table>
               </CardContent>
@@ -288,4 +273,23 @@ export default function PerformanceGraph(){
 
                     
                   </TableBody>
-                </Table>*/
+                </Table>
+                
+                
+                
+                 <TableBody>
+                    {process.map((aProcess) => (
+                    <StyledTableRow>
+                      <StyledTableCell>
+                        {
+                        aProcess.process}
+                      </StyledTableCell>
+                      <StyledTableCell>
+                        {aProcess.date}
+                      </StyledTableCell>
+                    </StyledTableRow>
+                    
+                    ))
+                  }
+                    
+                  </TableBody>*/
