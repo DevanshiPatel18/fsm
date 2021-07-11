@@ -22,6 +22,6 @@ export default function useProcessStatus(){
 }, [])
     console.log(processLog)
     return{
-        processLog
+        process
     }
 }

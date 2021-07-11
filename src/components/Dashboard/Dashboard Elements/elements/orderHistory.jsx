@@ -28,7 +28,7 @@ export default function OrderHistory(){
     //const theme = useTheme();
 
     const {history} = useOrderHistoryDetails();
-
+    console.log(history);
     return(
         <Grid style={{height: 82.75+'vh', overflow: 'hidden'}}>
             <Typography style={{textAlign : 'center', color: brown[800], fontWeight: 900}}>
@@ -48,7 +48,7 @@ export default function OrderHistory(){
                         {history.map((doc) => (
                             <TableRow key = {doc.id}>
                             <TableCell className = {classes.tableCell}>{doc.Type}</TableCell>
-                            <TableCell className = {classes.tableCell}>{new Date(doc.Time.seconds).toLocaleString()}</TableCell>
+                            <TableCell className = {classes.tableCell}>{new Date(doc.Time.seconds * 1000).toLocaleDateString("en-IN") + " "+new Date(doc.Time.seconds * 1000).toLocaleTimeString("en-IN") }</TableCell>
                             <TableCell className = {classes.tableCell}>{doc.Good === '1' ? 'Good' : 'Defective'}</TableCell>
                         </TableRow>
                         ))}

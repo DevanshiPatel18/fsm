@@ -12,6 +12,7 @@ import useProcessStatus from './processLogHook';
 import db from '../../../../firebase';
 import { useState } from 'react';
 import { useEffect } from 'react';
+import CustomLabel from './customLabel';
 const firebase = require('firebase');
 require('firebase/firestore')
 require('firebase/auth')
@@ -41,15 +42,13 @@ const StyledTableRow = withStyles((theme) => ({
 
 export default function PerformanceGraph(){
   //const theme = useTheme();
- 
-  
-  
-  let thiscurrentOEE =0;
-  let thiscurrentPer =0;
-  let thiscurrentAvail =0;
-  let thiscurrentQual =0;
 
-    const customLabel = [
+  let thiscurrentAvail = 0;
+  let thiscurrentOEE = 0;
+  let thiscurrentPer = 0;
+ let thiscurrentQual = 0;
+
+    const customLabel =  [
     {
       icon: ShowChart,
       text: 'OEE',
@@ -134,6 +133,9 @@ export default function PerformanceGraph(){
     chart.data.datasets[2].data.push({x: now, y: thiscurrentQual});
     chart.data.datasets[3].data.push({x: now, y: thiscurrentAvail});
 
+   
+  
+
     /*chart.data.datasets.forEach((dataset,id) => {
       console.log(id)
       dataset.data.push({
@@ -142,7 +144,7 @@ export default function PerformanceGraph(){
         });
      });
     */
-    
+
   };
   const config = {
     reponsive: true,
@@ -181,7 +183,7 @@ export default function PerformanceGraph(){
   };
 
    
-  const {processLog} = useProcessStatus();
+  const {process} = useProcessStatus();
   console.log(process);
     return(
         <div style={{display: 'flex', justifyContent: 'space-between',width: 100+'%',}}>
@@ -194,19 +196,7 @@ export default function PerformanceGraph(){
                   </div>
                }
             />
-            <CardActionArea style={{textAlign :'center'}}>
-            {customLabel.map((label) => (
-                <Grid style= {{ margin: 1+'%',width: 20+'%', display: 'inline-block'}}>
-                <Grid style={{display: 'inline-block',padding: 6+'%', backgroundColor: label.color, borderRadius: 100+'%'}}>
-                <ShowChart style={{color: 'white'}} size = 'large'></ShowChart>
-                </Grid>
-                  <Grid style={{display: 'inline-block', marginLeft: 5+ '%', verticalAlign: 'top'}}>
-                  <h4 style={{marginBottom: 0}}>{label.value}</h4>
-                  <p variant = 'body2' >{label.text}</p>
-                  </Grid>
-                </Grid>
-            ))}
-            </CardActionArea>
+            <CustomLabel></CustomLabel>
             <CardContent style={{}}>
                 <Line data = {data} options = {config} style={{}} />
             </CardContent>
@@ -230,7 +220,22 @@ export default function PerformanceGraph(){
                       <StyledTableCell>TimeStamp</StyledTableCell>
                     </TableRow>
                   </TableHead>
-                  
+                  <TableBody>
+                    {process.map((aProcess) => (
+                    <StyledTableRow>
+                      <StyledTableCell>
+                        {
+                        aProcess.process}
+                      </StyledTableCell>
+                      <StyledTableCell>
+                        {aProcess.date}
+                      </StyledTableCell>
+                    </StyledTableRow>
+                    
+                    ))
+                  }
+                    
+                  </TableBody>
                   </Scrollbars>
                 </Table>
               </CardContent>
